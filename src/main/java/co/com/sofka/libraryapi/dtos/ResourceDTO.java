@@ -1,41 +1,22 @@
-package co.com.sofka.libraryapi.entities;
+package co.com.sofka.libraryapi.dtos;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import java.util.UUID;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
-@Document
-public class Resource {
-    @Id
+public class ResourceDTO {
+
     private String id;
     private String title;
     private String type;
     private String subjectArea;
     private boolean isLent;
-    private LocalDate dateLent;
+    private String dateLent;
 
-    public Resource() {
+    public ResourceDTO() {
     }
 
-    public Resource(String id, String title, String type, String subjectArea) {
-        this.id = UUID.randomUUID().toString();
-        this.title = title;
-        this.type = type;
-        this.subjectArea = subjectArea;
-        this.isLent = false;
-    }
-    public void lend()
-    {
-        this.isLent = true;
-        this.dateLent = LocalDate.now();
-    }
-    public void giveBack()
-    {
-        this.isLent = false;
-        this.dateLent = null;
-    }
     public String getId() {
         return id;
     }
@@ -76,11 +57,11 @@ public class Resource {
         isLent = lent;
     }
 
-    public LocalDate getDateLent() {
+    public String getDateLent() {
         return dateLent;
     }
 
-    public void setDateLent(LocalDate dateLent) {
+    public void setDateLent(String dateLent) {
         this.dateLent = dateLent;
     }
 }
