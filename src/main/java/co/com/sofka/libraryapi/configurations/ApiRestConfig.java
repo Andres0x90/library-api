@@ -1,13 +1,13 @@
 package co.com.sofka.libraryapi.configurations;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-@SpringBootConfiguration
+@Configuration
 public class ApiRestConfig {
     @Bean
     public ModelMapper getModelMapper()

@@ -17,13 +17,7 @@ public class Resource {
     private LocalDate dateLent;
 
     public Resource() {
-    }
-
-    public Resource(String id, String title, String type, String subjectArea) {
         this.id = UUID.randomUUID().toString();
-        this.title = title;
-        this.type = type;
-        this.subjectArea = subjectArea;
         this.isLent = false;
     }
     public void lend()
