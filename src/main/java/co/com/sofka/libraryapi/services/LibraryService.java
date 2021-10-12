@@ -103,7 +103,7 @@ public class LibraryService {
         Resource resource = resourceRepository.findById(id).orElseThrow(()->
                 new RuntimeException("Recurso no encontrado"));
 
-        return resourceMapper.fromEntity(resourceRepository.save(resource));
+        return resourceMapper.fromEntity(resource);
     }
     public ResourceDTO update(ResourceDTO resourceDTO)
     {
