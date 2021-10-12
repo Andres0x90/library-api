@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 @RestController
 @RequestMapping("/resources")
@@ -22,6 +21,38 @@ public class LibraryController {
         this.libraryService = libraryService;
     }
 
+    @GetMapping("/check-availability/{id}")
+    public ResponseEntity<Map> checkAvailability(@PathVariable String id)
+    {
+        return new ResponseEntity<>(libraryService.checkAvailability(id), HttpStatus.OK);
+    }
+    @PutMapping("/lend/{id}")
+    public ResponseEntity<Map> lend(@PathVariable String id)
+    {
+        return new ResponseEntity<>(libraryService.lend(id), HttpStatus.OK);
+    }
+    @GetMapping("/filter-by-type/{type}")
+    public ResponseEntity<List> filterByType(@PathVariable String type)
+    {
+        return new ResponseEntity<>(libraryService.filterByType(type), HttpStatus.OK);
+    }
+    @GetMapping("/filter-by-subject-area/{subjectArea}")
+    public ResponseEntity<List> filterBySubjectArea(@PathVariable String subjectArea)
+    {
+        return new ResponseEntity<>(libraryService.filterBySubjectArea(subjectArea), HttpStatus.OK);
+    }
+    @GetMapping("/filter-by-type-and-subject-area")
+    public ResponseEntity<List> filterByTypeAndSubjectArea(@RequestParam String type,
+                                                           @RequestParam String subjectArea)
+    {
+        return new ResponseEntity<>(libraryService.filterByTypeAndSubjectArea(type, subjectArea),
+                HttpStatus.OK);
+    }
+    @PutMapping("/give-back/{id}")
+    public ResponseEntity<Map> giveBack(@PathVariable String id)
+    {
+        return new ResponseEntity<>(libraryService.giveBack(id), HttpStatus.OK);
+    }
     @PostMapping("/create")
     public ResponseEntity<ResourceDTO> create(@RequestBody ResourceDTO resourceDTO) {
         return new ResponseEntity<>(libraryService.create(resourceDTO), HttpStatus.OK);

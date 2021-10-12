@@ -18,6 +18,6 @@ public class ApiRestConfig {
     @Bean
     public DateTimeFormatter getDateTimeFormatter()
     {
-        return DateTimeFormatter.ofPattern("dd-MMM-yyyy'T'HH:mm:ss.SSSX", Locale.ENGLISH);
+        return DateTimeFormatter.ofPattern("dd-MMM-yyyy", Locale.ENGLISH);
     }
 }

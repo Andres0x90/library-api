@@ -28,14 +28,67 @@ public class LibraryService {
 
         if (resource.isLent())
         {
-            response.put("message", "Este recurso no se encuentra disponible para prestar");
-            response.put("resource", resourceMapper.fromEntity(resource));
+            response.putAll(resourceLentResponse(resource));
             return response;
         }
 
         response.put("message", "Este recurso se encuentra disponible");
         return response;
     }
+    public Map<String, Object> lend(String id)
+    {
+        HashMap<String, Object> response =  new HashMap<>();
+        Resource resource = resourceMapper.fromDTO(findById(id));
+
+        if (resource.isLent())
+        {
+            response.putAll(resourceLentResponse(resource));
+            return response;
+        }
+        resource.lend();
+        resource = resourceMapper.fromDTO(update(resourceMapper.fromEntity(resource)));
+
+        response.put("resource", resourceMapper.fromEntity(resource));
+        response.put("message", "Recurso prestado exitosamente");
+
+        return response;
+    }
+    public List<ResourceDTO> filterByType(String type)
+    {
+        return resourceMapper.fromEntityList(resourceRepository.findByType(type));
+    }
+    public List<ResourceDTO> filterBySubjectArea(String subjectArea)
+    {
+        return resourceMapper.fromEntityList(resourceRepository.findBySubjectArea(subjectArea));
+    }
+    public List<ResourceDTO> filterByTypeAndSubjectArea(String type, String subjectArea)
+    {
+        return resourceMapper.fromEntityList(resourceRepository.
+                findByTypeAndSubjectArea(type, subjectArea));
+    }
+    public Map<String, Object> giveBack(String id)
+    {
+        HashMap<String, Object> response =  new HashMap<>();
+        Resource resource = resourceMapper.fromDTO(findById(id));
+
+        if (resource.isLent())
+        {
+            resource.giveBack();
+            resourceMapper.fromDTO(update(resourceMapper.fromEntity(resource)));
+            response.put("message", "Recurso devuelto exitosamente");
+            return response;
+        }
+        response.put("message", "Este recurso no se encuentra prestado");
+        return response;
+    }
+    public Map<String, Object> resourceLentResponse(Resource resource)
+    {
+        HashMap<String, Object> response =  new HashMap<>();
+        response.put("message", "Este recurso no se encuentra disponible para prestar");
+        response.put("resource", resourceMapper.fromEntity(resource));
+        return response;
+    }
+
     public ResourceDTO create(ResourceDTO resourceDTO)
     {
         Resource resource = resourceMapper.fromDTO(resourceDTO);

@@ -1,10 +1,5 @@
 package co.com.sofka.libraryapi.dtos;
 
-import org.springframework.data.annotation.Id;
-
-import java.time.LocalDate;
-import java.util.UUID;
-
 public class ResourceDTO {
 
     private String id;
