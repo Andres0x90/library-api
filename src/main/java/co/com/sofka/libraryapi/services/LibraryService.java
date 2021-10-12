@@ -81,7 +81,7 @@ public class LibraryService {
         response.put("message", "Este recurso no se encuentra prestado");
         return response;
     }
-    public Map<String, Object> resourceLentResponse(Resource resource)
+    private Map<String, Object> resourceLentResponse(Resource resource)
     {
         HashMap<String, Object> response =  new HashMap<>();
         response.put("message", "Este recurso no se encuentra disponible para prestar");
